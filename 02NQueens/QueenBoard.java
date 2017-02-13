@@ -12,8 +12,8 @@ public class QueenBoard {
 		board[r][c]--;//-1 = a queen
 		for (int x=0; x<board.length;x++){
 			for (int y=0; y<board.length; y++){
-				if (!(x==r && y== c)){//+1 to the squares it threatens
-					if (x==r || y==c || Math.abs(r-x)==Math.abs(c-y)){board[x][y]++;}					
+				if (!(x==r && y== c)){
+					if (x==r || y==c || Math.abs(r-x)==Math.abs(c-y)){board[x][y]++;}//+1 to the squares it threatens					
 				}
 			}
 		}
@@ -29,29 +29,23 @@ public class QueenBoard {
 		}
 	}
     public void solve(){
-    	solutionCount=0;
-	countSolutions(0);
     	solveH(0);
     }
-    public void countSolutions(int c){
+    public void countSolutions(){
+	countSolutionsH(0);
+    }
+    private void countSolutionsH(int c){
     	if (c>=board.length){
     		solutionCount++;
-    		for (int r=0; r<board.length; r++){
-    			for (int cee=0; cee<board.length; cee++){
-    				oneSolution[r][cee]=board[r][cee];
-    			}
-    		}
-    		//return true;
 		return;	
     	}
     	for (int r=0; r<board.length; r++){
     			if (board[r][c]==0){
     				addQueen(r,c);
-    				countSolutions(c+1);
+    				countSolutionsH(c+1);
     				removeQueen(r,c);
     			}
     		}
-    	//return solutionCount>0;
     }
 
 	private boolean solveH(int c){
@@ -93,9 +87,10 @@ public class QueenBoard {
     }
     
     public static void main(String[] args){
-    	QueenBoard marg=new QueenBoard(13);	
-    	marg.solve();
-    	System.out.println(marg);
+    	QueenBoard marg=new QueenBoard(8);	
+	marg.solve();
+	marg.countSolutions();
+    	System.out.println(marg.solutionCount);
     }
     
 }
