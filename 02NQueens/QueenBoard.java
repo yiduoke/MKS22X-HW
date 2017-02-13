@@ -1,12 +1,13 @@
 
 public class QueenBoard {
 	private int[][]board;
-    private int solutionCount;
-    private int[][]oneSolution;
+    	private int solutionCount;
+    	private int[][]oneSolution;
     
 	public QueenBoard(int size){
 			board = new int[size][size];
 			oneSolution=new int[size][size];
+			solutionCount=-1;
 		    }
 	public void addQueen(int r, int c){
 		board[r][c]--;//-1 = a queen
@@ -30,6 +31,7 @@ public class QueenBoard {
 	}
     public void solve(){
     	solveH(0);
+	solutionCount=0;
     }
     public void countSolutions(){
 	countSolutionsH(0);
@@ -87,8 +89,7 @@ public class QueenBoard {
     }
     
     public static void main(String[] args){
-    	QueenBoard marg=new QueenBoard(8);	
-	marg.solve();
+    	QueenBoard marg=new QueenBoard(4);	
 	marg.countSolutions();
     	System.out.println(marg.solutionCount);
     }
