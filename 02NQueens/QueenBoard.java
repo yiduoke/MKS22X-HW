@@ -34,6 +34,7 @@ public class QueenBoard {
 	solutionCount=0;
     }
     public void countSolutions(){
+	solutionCount=0;
 	countSolutionsH(0);
     }
     private void countSolutionsH(int c){
