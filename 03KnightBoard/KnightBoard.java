@@ -1,6 +1,6 @@
 public class KnightBoard{
     private int[][]board;
-    pubic KnightBoard(int startingRows, int startingCols){
+    public KnightBoard(int startingRows, int startingCols){
 	board=new int[startingRows][startingCols];
 }
 
@@ -26,8 +26,8 @@ public class KnightBoard{
 	board[r][c]=0;
     }
 
-    public void solve(){solveH(0,0, 1);}
-    public boolean solveH(int r, int c, int num){
+    public void solve(){solveH (0,0,1);}
+    public boolean solveH(int x, int y, int num){
 	if (num>board.length*board[0].length){return true;}
 	for (int r=0;r<board.length;r++){
 	    for (int c=0;c<board[0].length;c++){
@@ -101,5 +101,13 @@ public class KnightBoard{
 		}
 	    }
 	}
+	return false;
+    }
+
+    
+    public static void main(String[] args){
+    	KnightBoard marg=new KnightBoard(7,7);	
+	marg.solve();
+    	System.out.println(marg);
     }
 }
