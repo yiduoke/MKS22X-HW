@@ -58,7 +58,9 @@ public class KnightBoard{
     }
     
     public static void main(String[] args){
-    	KnightBoard marg=new KnightBoard(7,9);	
+	int r=Integer.parseInt(args[0]);
+	int c=Integer.parseInt(args[1]);
+    	KnightBoard marg=new KnightBoard(r,c);	
     	marg.solve();
     	System.out.println(marg);
     }
