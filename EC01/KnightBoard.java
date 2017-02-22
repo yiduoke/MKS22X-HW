@@ -136,5 +136,12 @@ public class KnightBoard {
         	return true;}
         return false;
     }
+    public static void main(String[] args){
+	int r=Integer.parseInt(args[0]);
+	int c=Integer.parseInt(args[1]);
+    	KnightBoard marg=new KnightBoard(r,c);	
+    	marg.solveFast();
+    	System.out.println(marg);
+    }
     
 }
