@@ -1,5 +1,5 @@
 
-public class KnightBoard{
+public class KnightBoard {
     private int[][]board;
     private int[][]numMoves;
     private int[] xMove = {-2,-1, 1, -1, 2, 1, 2, -2};
@@ -43,7 +43,14 @@ public class KnightBoard{
     private void removeKnight(int r, int c){board[r][c]=0;}
     
     public void solveFast(){
-    	solveFastH (0,0,1);
+    	if (board.length<5 || board[0].length<5){
+    		solveH(0,0,1);
+    	}
+    	else{solveFastH (0,0,1);}
+    }
+    
+    public void solve(){
+    	solveH (0,0,1);
     }
     
     private boolean solveFastH(int r, int c, int num){
@@ -92,6 +99,22 @@ public class KnightBoard{
     	return false;
     }
     
+    public boolean solveH(int r, int c, int num){
+	if (num>board.length*board[0].length){return true;}
+	for (int i=0; i<8; i++){
+		int nextX=r+xMove[i];
+		int nextY=c+yMove[i];
+		if (canPut(r,c)){
+			addKnight(r,c,num);
+			if (solveH(nextX,nextY,num+1)){
+				return true;
+			}
+			else{removeKnight(r,c);}
+		}
+	}
+	return false;
+    }
+    
     private void subtractSurroundings(int r, int c){
     	for (int i=0; i<8; i++){
     		int nextX=r+xMove[i];
@@ -114,12 +137,4 @@ public class KnightBoard{
         return false;
     }
     
-    public static void main(String[] args){
-    	KnightBoardFast marg=new KnightBoardFast(0,0);
-    	for (int i=5; i<99;i++){
-    		marg=new KnightBoardFast(i,i);
-        	marg.solveFast();
-        	System.out.println(marg+"\n"+i);
-    	}
-    }
 }
