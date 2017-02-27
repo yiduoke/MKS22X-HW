@@ -16,7 +16,10 @@ public class Maze{
 	    oneD[lineNumber]=line;
 	    lineNumber++;
 	}
-	
+	int i=0;
+	while (oneD[0].charAt(i)!=''){
+
+	}
 	temp twoD[lineNumber+1][] char = new char[lineNumber+1][0]; 
     }
   public static void main(String args[]) throws FileNotFoundException {
