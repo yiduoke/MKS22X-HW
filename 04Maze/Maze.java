@@ -46,9 +46,33 @@ public class Maze{
     }
     
     private boolean solveH(int row, int col){
-    	
+    	if (maze[row][col]=='E'){return true;}
+	if (surrounded(row,col)){
+	    maze[row][col]='.';
+	    goBack(row,col);
+	}
+	else{
+	    for (int i=0; i<4; i++){
+		int nextX=row+xMove[i];
+		int nextY=col+yMove[i];
+		if (canGo(nextX,nextY)){
+		    solveH(nextX,nextY);
+		}
+	    }
+	}
+	return false;
     }
     
+    private void surrounded(int r, int c){
+	int x=0;
+	for (int i=0; i<4; i++){
+	    int nextX=r+xMove[i];
+	    int nextY=c+yMove[i];
+	    if (maze[nextX][nextY]=='#'){x++;}
+	}
+	return x>2;
+    }
+
     public void solve(){
     	solveH(startRow, startCol);
     }
