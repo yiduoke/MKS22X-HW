@@ -63,7 +63,7 @@ public class Maze{
 	return false;
     }
     
-    private void surrounded(int r, int c){
+    private boolean surrounded(int r, int c){
 	int x=0;
 	for (int i=0; i<4; i++){
 	    int nextX=r+xMove[i];
