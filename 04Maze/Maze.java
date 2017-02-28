@@ -8,6 +8,8 @@ public class Maze{
     private boolean animate;
     private int startRow;
     private int startCol;
+    private int[] xMove={1,1,-1,-1};
+    private int[] yMove={1,-1,1,-1};
 
     public Maze (String filename, boolean ani){
     	animate=ani;
