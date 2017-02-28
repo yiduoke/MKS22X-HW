@@ -6,6 +6,8 @@ import java.util.Scanner;
 public class Maze{
     private char[][] maze;
     private boolean animate;
+    private int startRow;
+    private int startCol;
 
     public Maze (String filename, boolean ani){
     	animate=ani;
@@ -32,12 +34,17 @@ public class Maze{
     			String eachRow=lines.get(i);
     			for (int j=0; j<columns; j++){
     				maze[i][j]=eachRow.charAt(j);
+    				if (maze[i][j]=='S'){startRow=i; startCol=j;}
     			}
     		}
 	    	}
     		catch (FileNotFoundException e) {
     			System.out.println(filename+" does not exist");
 			}
+    }
+    
+    private boolean solveH(int row, int col){
+    	
     }
     
     public String toString(){
