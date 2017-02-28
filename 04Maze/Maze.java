@@ -47,6 +47,10 @@ public class Maze{
     	
     }
     
+    public void solve(){
+    	solveH(startRow, startCol);
+    }
+    
     public String toString(){
     	String x="";
     	for (int i=0; i<maze.length; i++){
