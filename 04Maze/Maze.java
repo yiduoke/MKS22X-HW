@@ -8,8 +8,8 @@ public class Maze{
     private boolean animate;
     private int startRow;
     private int startCol;
-    private int[] xMove={1,1,-1,-1};
-    private int[] yMove={1,-1,1,-1};
+    private int[] xMove={1,0,-1,0};
+    private int[] yMove={0,1,0,-1};
 
     public Maze (String filename, boolean ani){
     	animate=ani;
@@ -45,36 +45,86 @@ public class Maze{
 			}
     }
     
-    private boolean solveH(int row, int col){
-    	if (maze[row][col]=='E'){return true;}
-	if (surrounded(row,col)){
-	    maze[row][col]='.';
-	    goBack(row,col);
-	}
-	else{
-	    for (int i=0; i<4; i++){
-		int nextX=row+xMove[i];
-		int nextY=col+yMove[i];
-		if (canGo(nextX,nextY)){
-		    solveH(nextX,nextY);
+    private void wait(int millis){
+        try {
+            Thread.sleep(millis);
+        }
+        catch (InterruptedException e) {
+        }
+    }
+    
+    public void setAnimate(boolean b){
+        animate = b;
+    }
+    
+    public void clearTerminal(){
+        //erase terminal, go to top left of screen.
+        System.out.println("\033[2J\033[1;1H");
+    }
+    
+    private boolean solve(int row, int col){
+    	 if(animate){
+             System.out.println("\033[2J\033[1;1H"+this);
+             wait(20);
+         }
+    	
+    	if (maze[row][col]=='E'){return true;} 	
+    	
+    	else{           
+        	if (deadEnd(row, col)){
+        		maze[row][col]='.';
+        		return false;
+        		}
+            else {maze[row][col]='@';}
+        	
+            //kinda like optimizing??
+            int[] goRanks = new int[4];
+    		for (int i=0; i<4; i++){
+    			int nextX=row+xMove[i];
+    			int nextY=col+yMove[i];
+    			if (maze[nextX][nextY]=='E'){
+    				goRanks[i]=i;
+    			}
+    			else if (maze[nextX][nextY]==' '){
+    				goRanks[i]=10+i;
+    			}
+    			else if (maze[nextX][nextY]=='@'){
+    				goRanks[i]=20+i;
+    			}
+    			else{
+    				goRanks[i]=30;
+    			}
+    		}
+    		java.util.Arrays.sort(goRanks);
+            
+    		for (int i=0; i<4; i++){
+    			int nextX=row+xMove[goRanks[i]%10];
+    			int nextY=col+yMove[goRanks[i]%10];
+    			if (canGo(nextX,nextY) && solve(nextX,nextY)){
+    				solve(nextX,nextY);
+    				System.exit(0);
+    			}
+    		}
 		}
-	    }
-	}
 	return false;
     }
     
-    private boolean surrounded(int r, int c){
+    private boolean canGo(int r, int c){
+    	return maze[r][c]!='#' && maze[r][c]!='.';
+    }
+    
+    private boolean deadEnd(int r, int c){
 	int x=0;
 	for (int i=0; i<4; i++){
 	    int nextX=r+xMove[i];
 	    int nextY=c+yMove[i];
-	    if (maze[nextX][nextY]=='#'){x++;}
+	    if (maze[nextX][nextY]==' ' || maze[nextX][nextY]=='E'){x++;}
 	}
-	return x>2;
+	return !(x>0);
     }
 
     public void solve(){
-    	solveH(startRow, startCol);
+    	solve(startRow, startCol);
     }
     
     public String toString(){
@@ -89,7 +139,9 @@ public class Maze{
     }
     
     public static void main(String[] args){
-    	Maze marg=new Maze("maze1.txt",false);
-    	System.out.println(marg);
+    	Maze marg=new Maze("data2.dat",false);
+    	marg.setAnimate(true);
+    	marg.solve();
+    	//System.out.println(marg);
     }
 }
