@@ -115,10 +115,6 @@ public class Maze{
     	return maze[r][c]!='#' && maze[r][c]!='.';
     }
     
-    private boolean inBounds(int r, int c){
-    	return r>=0 && r<maze.length && c>=0 && c<maze[0].length;
-    }
-    
     private boolean deadEnd(int r, int c){
 	int x=0;
 	for (int i=0; i<4; i++){
