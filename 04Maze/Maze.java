@@ -72,12 +72,13 @@ public class Maze{
     	
     	else{           
         	if (deadEnd(row, col)){
-        		maze[row][col]='.';
+        		maze[row][col]='.'; 	
         		return false;
         		}
-            else {maze[row][col]='@';}
+            else {
+            	maze[row][col]='@'; 	
+            	}
         	
-            //kinda like optimizing??
             int[] goRanks = new int[4];
     		for (int i=0; i<4; i++){
     			int nextX=row+xMove[i];
@@ -96,14 +97,15 @@ public class Maze{
     			}
     		}
     		java.util.Arrays.sort(goRanks);
+    		
             
     		for (int i=0; i<4; i++){
     			int nextX=row+xMove[goRanks[i]%10];
     			int nextY=col+yMove[goRanks[i]%10];
     			if (canGo(nextX,nextY) && solve(nextX,nextY)){
-    				solve(nextX,nextY);
-    				System.exit(0);
+    				return true;
     			}
+    			else{maze[row][col]='.';}
     		}
 		}
 	return false;
@@ -111,6 +113,10 @@ public class Maze{
     
     private boolean canGo(int r, int c){
     	return maze[r][c]!='#' && maze[r][c]!='.';
+    }
+    
+    private boolean inBounds(int r, int c){
+    	return r>=0 && r<maze.length && c>=0 && c<maze[0].length;
     }
     
     private boolean deadEnd(int r, int c){
@@ -136,12 +142,5 @@ public class Maze{
     		x+="\n";
     	}
     	return x;
-    }
-    
-    public static void main(String[] args){
-    	Maze marg=new Maze("data2.dat",false);
-    	marg.setAnimate(true);
-    	marg.solve();
-    	//System.out.println(marg);
     }
 }
