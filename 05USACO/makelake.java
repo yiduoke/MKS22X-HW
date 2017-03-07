@@ -7,6 +7,7 @@ public class makelake {
 	private int[][] lake;
 	private int elevation;
 	private int numSteps;
+	private int[][] steps;
 	
 	public makelake(String filename){
     	ArrayList<Integer> stuffs=new ArrayList<Integer>();
@@ -30,6 +31,13 @@ public class makelake {
     				index++;
     			}
     		}
+    		
+    		steps = new int[numSteps][3];
+    		for (int r=0; r<numSteps; r++){
+    			for (int c=0; c<3; c++){
+    				steps[r][c]=stuffs.remove(lake.length*lake[0].length);
+    			}
+    		}
 	    	}
     		catch (FileNotFoundException e) {
     			System.out.println(filename+" does not exist");
@@ -47,10 +55,22 @@ public class makelake {
 		return x;
 	}
 	
+	public String toStringSteps(){
+		String x="";
+		for (int r=0; r<numSteps; r++){
+			for (int c=0; c<3; c++){
+				x+=steps[r][c]+" ";
+			}
+			x+="\n";
+		}
+		return x;
+	}
+	
 	public static void main(String[] args){
 		makelake margaret= new makelake("lake1.txt");
 		System.out.println(margaret);
 		System.out.println(margaret.elevation);
 		System.out.println(margaret.numSteps);
+		System.out.println(margaret.toStringSteps());
 	}
 }
