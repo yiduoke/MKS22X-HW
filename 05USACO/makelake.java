@@ -24,18 +24,16 @@ public class makelake {
     		elevation = stuffs.remove(0);
     		numSteps = stuffs.remove(0);
     		
-    		int index=0;
     		for (int r=0; r<lake.length; r++){
     			for (int c=0; c<lake[0].length; c++){
-    				lake[r][c]=stuffs.get(index);
-    				index++;
+    				lake[r][c]=stuffs.remove(0);
     			}
     		}
     		
     		steps = new int[numSteps][3];
     		for (int r=0; r<numSteps; r++){
     			for (int c=0; c<3; c++){
-    				steps[r][c]=stuffs.remove(lake.length*lake[0].length);
+    				steps[r][c]=stuffs.remove(0);
     			}
     		}
 	    	}
