@@ -33,7 +33,10 @@ public class makelake {
     		steps = new int[numSteps][3];
     		for (int r=0; r<numSteps; r++){
     			for (int c=0; c<3; c++){
-    				steps[r][c]=stuffs.remove(0);
+			    if (c!=2){
+    				steps[r][c]=stuffs.remove(0)-1;
+			    }
+			    else{steps[r][c]=stuffs.remove(0);}
     			}
     		}
 	    	}
@@ -63,12 +66,49 @@ public class makelake {
 		}
 		return x;
 	}
+
+
+    public int[] takeHighest(int row, int col) {
+	int highest = 0;
+	int[] returnV = {0,0};
+	for (int r = 0; r < 3; r++) {
+	    for (int c = 0; c < 3; c++) {
+		if (lake[row + r][col + c] > highest) {
+		    highest = lake[row + r][col + c];
+		    returnV[0] = row + r;
+		    returnV[1] = col + c;
+		}
+	    }
+	}
+	return returnV;
+    }
+
 	
+    public void stomp(){
+	int[] highestSpot;
+	int high;
+	for (int i=0; i<numSteps; i++){
+	    System.out.println(steps[i][1]);
+	    highestSpot = takeHighest(steps[i][0], steps[i][1]);
+	    high = lake[highestSpot[0]][highestSpot[1]];
+	    high -= steps[i][2];
+	    for (int r=0; r<3; r++){
+		for (int c=0; c<3; c++){
+		    if (lake[r + steps[i][0]][c + steps[i][1]] > high) {
+			lake[r + steps[i][0]][c + steps[i][1]] = high;
+		    }
+		}
+	    }
+	}
+    }
+
 	public static void main(String[] args){
 		makelake margaret= new makelake("lake1.txt");
+		// System.out.println(margaret);
+		// System.out.println(margaret.elevation);
+		// System.out.println(margaret.numSteps);
+		// System.out.println(margaret.toStringSteps());
+		margaret.stomp();
 		System.out.println(margaret);
-		System.out.println(margaret.elevation);
-		System.out.println(margaret.numSteps);
-		System.out.println(margaret.toStringSteps());
 	}
 }
