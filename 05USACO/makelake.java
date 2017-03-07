@@ -100,6 +100,12 @@ public class makelake {
 		}
 	    }
 	}
+	for (int r=0; r<lake.length; r++){
+	    for (int c=0; c<lake[0].length; c++){
+		lake[r][c]-=elevation;
+		lake[r][c]*=-1;
+	    }
+	}
     }
 
 	public static void main(String[] args){
