@@ -84,11 +84,10 @@ public class makelake {
     }
 
 	
-    public void stomp(){
+    public int stomp(){
 	int[] highestSpot;
 	int high;
 	for (int i=0; i<numSteps; i++){
-	    System.out.println(steps[i][1]);
 	    highestSpot = takeHighest(steps[i][0], steps[i][1]);
 	    high = lake[highestSpot[0]][highestSpot[1]];
 	    high -= steps[i][2];
@@ -106,15 +105,18 @@ public class makelake {
 		lake[r][c]*=-1;
 	    }
 	}
+	
+	int sum=0;
+	for (int r=0; r<lake.length; r++){
+		for (int c=0; c<lake[0].length; c++){
+			if (lake[r][c]>0){sum+=lake[r][c];}
+		}
+	}
+	return sum*72*72;
     }
 
 	public static void main(String[] args){
 		makelake margaret= new makelake("lake1.txt");
-		// System.out.println(margaret);
-		// System.out.println(margaret.elevation);
-		// System.out.println(margaret.numSteps);
-		// System.out.println(margaret.toStringSteps());
-		margaret.stomp();
-		System.out.println(margaret);
+		System.out.println(margaret.stomp());
 	}
 }
