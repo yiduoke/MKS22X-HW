@@ -12,13 +12,4 @@ public class USACO {
 		silver = new Silver(filename);
 		return silver.solve();
 	}
-	
-	public static void main(String[] args){
-		USACO x = new USACO(); //does not have to do anything. 
-
-		System.out.println (x.bronze("lake1.txt"));
-
-		System.out.println (x.silver("silver.txt"));
-
-	}
 }

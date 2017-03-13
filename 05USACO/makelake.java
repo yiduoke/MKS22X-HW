@@ -114,9 +114,4 @@ public class makelake {
 	}
 	return sum*72*72;
     }
-
-	public static void main(String[] args){
-		makelake margaret= new makelake("lake1.txt");
-		System.out.println(margaret.stomp());
-	}
 }

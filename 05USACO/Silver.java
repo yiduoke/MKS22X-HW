@@ -13,6 +13,7 @@ public class Silver {
     private int[] yMove={0,1,0,-1};
 	public char[][] maze;
 	private int solutions;
+	private int[][] cells;
 	
 	public Silver(String filename){
 		ArrayList<String> mazeLines=new ArrayList<String>();
@@ -38,6 +39,8 @@ public class Silver {
     				maze[r][c]=mazeLines.get(r).charAt(c);
     			}
     		}
+    		cells=new int[maze.length][maze[0].length];
+    		cells[startRow][startCol]=1;
     		}
     		
     		catch (FileNotFoundException e) {
@@ -57,14 +60,50 @@ public class Silver {
     	maze[r][c]='.';
     }
     
+	public int solveSlow(){
+		countSolutions(startRow, startCol,0);
+		return solutions;
+	}
+	
+	public int solve(){
+		int[][]temp=new int[maze.length][maze[0].length];
+		for (int i=0; i<time; i++){
+			for (int row=0; row<maze.length; row++){
+				for (int col=0; col<maze[0].length; col++){
+					if (maze[row][col]!='*'){
+						temp[row][col]=neighborSum(row,col);
+					}
+				}
+			}
+			copyOver(temp,cells);
+		}
+		return cells[endRow][endCol];
+	}
+	
+	public void copyOver(int[][] from, int[][] to){
+		for (int r=0; r<from.length; r++){
+			for (int c=0; c<from[0].length; c++){
+				to[r][c]=from[r][c];
+			}
+		}
+	}
+	
+	public int neighborSum(int r, int c){
+		int x=0;
+		for (int i=0; i<4; i++){
+			int nextX=r+xMove[i];
+			int nextY=c+yMove[i];
+			if (inBounds(nextX,nextY)){
+				x+=cells[nextX][nextY];
+			}
+		}
+		return x;
+	}
+    
     private boolean inBounds(int r, int c){
     	return r>=0 && r<maze.length && c>=0 && c<maze[0].length;
     }
 	
-	public int solve(){
-		countSolutions(startRow, startCol,0);
-		return solutions;
-	}
 	
     public String toString(){
     	String x="";
@@ -76,9 +115,15 @@ public class Silver {
     	}
     	return x;
     }
-	
-	public static void main(String[] args){
-		Silver margaret = new Silver(args[0]);
-		System.out.println(margaret.solve());
-	}
+    
+    public String toStringCell(){
+    	String x="";
+    	for (int i=0; i<maze.length; i++){
+    		for (int j=0; j<maze[0].length; j++){
+    			x+=cells[i][j]+" ";
+    		}
+    		x+="\n";
+    	}
+    	return x;
+    }
 }
