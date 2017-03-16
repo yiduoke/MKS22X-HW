@@ -16,6 +16,7 @@ public class Quick {
 			if (pivotIndex<k){return quickselect(data,pivotIndex+1,end,k);}
 			return quickselect(data,start,pivotIndex-1,k);
 	}
+    public static int quickselect(int[] data, int k){return quickselect(data,0,data.length-1,k);}
 	
 	public static String toString(int[] data){
 		String x="";
@@ -62,7 +63,7 @@ public class Quick {
 			for (int j=0; j<10; j++){
 				margaret[j]=(int)(Math.random()*20);
 			}
-			System.out.println(quickselect(margaret,0,margaret.length-1,5));
+			System.out.println(quickselect(margaret,5));
 			quickSort(margaret);
 			//System.out.println(partition(margaret,0,9));
 			System.out.println(margaret[5]);
