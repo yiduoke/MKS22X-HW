@@ -11,8 +11,4 @@ public class Recursion {
 		 if (Math.abs(n-guess*guess)/n<0.000000001){return guess;}
 		 return sqrtHalp(n,(n/guess+guess)/2);
 	 }
-	 
-	 public static void main(String[] args){
-		 System.out.println(sqrt(100));
-	 }
 }
