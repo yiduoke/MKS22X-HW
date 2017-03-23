@@ -4,7 +4,8 @@ public class Merge{
 	int j=0;
 	int k=0;
 	while (i<a.length && j<b.length){
-	    if (left[i]<=b[j]){destination[k]=left[i]; k++;}
+	    if (left[i]<=b[j]){destination[k]=left[i]; k++; i++;}
+else
 	}
     }
     public void mergesort(int[] ary){
