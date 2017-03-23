@@ -69,12 +69,4 @@ public class Quick {
 	data[y] = data[x];
 	data[x] = temp;
 }
-    public static void main(String[] args){
-	int[] margaret={0,0,0,0,0,0,0,0,0,-4};
-	for (int i=0; i<10; i++){
-	    margaret[i]=(int)(Math.random()*90);
-	}
-	quicksort(margaret);
-	System.out.println(toString(margaret));
-    }
 }
