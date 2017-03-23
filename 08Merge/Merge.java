@@ -1,6 +1,11 @@
 public class Merge{
     public void merge(int[] a, int[] b, int[] destination){
-	
+	int i=0;
+	int j=0;
+	int k=0;
+	while (i<a.length && j<b.length){
+	    if (left[i]<=b[j]){destination[k]=left[i]; k++;}
+	}
     }
     public void mergesort(int[] ary){
 	int[] left=new int[ary.length/2];
