@@ -37,9 +37,7 @@ public class Quick {
 	
 	//used in quicksort and quickselect; a helper method
     public static int[] partition(int[] data, int start, int end){
-	int pivotIndex=(int)(Math.random() * (end - start + 1) + start);	        int pivotTemp = data[pivotIndex];		    
-	data[pivotIndex]=data[start];
-	data[start]=pivotTemp;
+	int pivotIndex=(int)(Math.random() * (end - start + 1) + start);	         swap(data,pivotIndex,start);
 
 
 	int i=start;
