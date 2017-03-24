@@ -1,14 +1,15 @@
 public class Merge{
-    public void merge(int[] a, int[] b, int[] destination){
+    public static void merge(int[] a, int[] b, int[] destination){
 	int i=0;
 	int j=0;
 	int k=0;
 	while (i<a.length && j<b.length){
-	    if (left[i]<=b[j]){destination[k]=a[i]; k++; i++;}
-	    else{destination[k]=b[j]; k++; i++;}
+	    if (a[i]<=b[j]){destination[k]=a[i]; k++; i++;}
+	    else{destination[k]=b[j]; k++; j++;}
 	}
     }
-    public void mergesort(int[] ary){
+    public static void mergesort(int[] ary){
+	if (ary.length>0){
 	int[] left=new int[ary.length/2];
 	int[] right=new int[ary.length-left.length];
 	for (int i=0; i<ary.length/2; i++){
@@ -17,11 +18,17 @@ public class Merge{
 	for (int i=ary.length/2; i<ary.length; i++){
 	    right[i-ary.length/2]=ary[i];
 	}
+	if (left.length>0){
 	mergesort(left);
+	}
+	if (right.length>0){
 	mergesort(right);
+	}
 	merge(left,right,ary);
     }
+    }
     public static void main(String[] args){
-	System.out.println(5/2);
+	int[] margaret={2,3,0,91,9,-2,5,8};
+	mergesort(margaret);
     }
 }
