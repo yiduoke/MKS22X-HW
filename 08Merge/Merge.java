@@ -29,6 +29,8 @@ public class Merge{
     }
     public static void main(String[] args){
 	int[] margaret={2,3,0,91,9,-2,5,8};
-	mergesort(margaret);
+	int[] penn={2,6,-1,29,-1};
+	int[] stuff= new int[margaret.length+penn.length];
+	merge(penn,stuff,margaret);
     }
 }
