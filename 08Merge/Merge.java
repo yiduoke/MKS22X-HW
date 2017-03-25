@@ -4,33 +4,50 @@ public class Merge{
 	int j=0;
 	int k=0;
 	while (i<a.length && j<b.length){
-	    if (a[i]<=b[j]){destination[k]=a[i]; k++; i++;}
-	    else{destination[k]=b[j]; k++; j++;}
+	    if (a[i]<b[j]){destination[k]=a[i]; i++;}
+	    else{destination[k]=b[j]; j++;}
+	    k++;
 	}
+	for (int x=i; x<a.length; x++){
+		destination[k]=a[x];
+		k++;
+	}
+	for (int y=j; y<b.length; y++){
+		destination[k]=b[y];
+		k++;
+	}
+	 
     }
     public static void mergesort(int[] ary){
-	if (ary.length>0){
-	int[] left=new int[ary.length/2];
-	int[] right=new int[ary.length-left.length];
-	for (int i=0; i<ary.length/2; i++){
-	    left[i]=ary[i];
-	}
-	for (int i=ary.length/2; i<ary.length; i++){
-	    right[i-ary.length/2]=ary[i];
-	}
-	if (left.length>0){
-	mergesort(left);
-	}
-	if (right.length>0){
-	mergesort(right);
-	}
-	merge(left,right,ary);
+    	if (ary.length>1){
+    		int[] left=new int[ary.length/2];
+    		int[] right=new int[ary.length-left.length];
+    		for (int i=0; i<ary.length/2; i++){
+    			left[i]=ary[i];
+    		}
+    		for (int i=left.length; i<ary.length; i++){
+    			right[i-left.length]=ary[i];
+    		}
+    			mergesort(left);
+    			mergesort(right);
+    		merge(left,right,ary);
+    	}
     }
-    }
+    
+    private static void toString(int[] data){
+		String x="";
+		for (int i=0; i<data.length; i++){
+			x+=data[i]+" ";
+		}
+		System.out.println(x);
+	}
+    
     public static void main(String[] args){
-	int[] margaret={2,3,0,91,9,-2,5,8};
-	int[] penn={2,6,-1,29,-1};
-	int[] stuff= new int[margaret.length+penn.length];
-	merge(penn,stuff,margaret);
+	int[] margaret= new int[50];
+	for (int i=0; i<50; i++){
+		margaret[i]=(int)(Math.random()*60);
+	}
+	mergesort(margaret);
+	toString(margaret);
     }
 }
