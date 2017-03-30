@@ -22,14 +22,26 @@ public class MyLinkedList{
     	size=0;
     }
     public boolean add(int value){
-    	size++;
-    	LNode current = start;
-    	for (int i=0; i<size; i++){
-    		start=start.next;
-    	}
-    	start.first=value;
-    	start.next=null;
-    	return true;
+    	 LNode last = lastNode();
+         if (last == null) {
+             start = new LNode(value);
+         } 
+         else{
+             last.next = new LNode(value);
+         }
+         size++;
+         return true;
+    }
+    
+    public LNode lastNode() {
+        if (start == null) {
+            return null;
+        }
+        LNode current = start;
+        while (current.next != null) {
+            current = current.next;
+        }
+        return current;
     }
     
     public int size(){return size;}
@@ -39,8 +51,10 @@ public class MyLinkedList{
     	LNode current = start;
     	for (int i=0; i<size; i++){
     		if (i==size-1){x+=current.first;}
-    		x+=current.first+", ";
-    		current=current.next;
+    		else{
+    			x+=current.first+", ";
+    			current=current.next;
+    		}
     	}
     	x+="]";
     	return x;
@@ -53,6 +67,9 @@ public class MyLinkedList{
     
     public static void main(String[] args){
     	MyLinkedList margaret = new MyLinkedList();
+    	margaret.add(10);
+    	margaret.add(5);
     	System.out.println(margaret.toString());
+    	System.out.println(margaret.size);
     }
 }
