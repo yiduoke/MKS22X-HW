@@ -117,7 +117,7 @@ public class MyLinkedList{
     		start = start.next; 
     		size--;
     		return x;
-    		}
+    	}
     	
     	else if (index == size-1){
             LNode current = start;
@@ -131,19 +131,20 @@ public class MyLinkedList{
     	}
     	
     	else{
-    	LNode current=start;
-    	for (int i=0; i<index+1; i++){
-    		current = current.next;
-    	}
-    	LNode temp = current;
-    	int x=current.first;
+    		size--;
+    		LNode current=start;
+    		for (int i=0; i<index+1; i++){
+    			current = current.next;
+    		}
+    		LNode temp = current;
+    		int x=current.first;
     	
-    	LNode current2 = start;
-    	for (int i=0; i<index-1; i++){
-    		current2 = current2.next;
-    	}
-    	current2.next = temp;
-    	return x;
+    		LNode current2 = start;
+    		for (int i=0; i<index-1; i++){
+    			current2 = current2.next;
+    		}
+    		current2.next = temp;
+    		return x;
     	}
     }
     
@@ -154,7 +155,7 @@ public class MyLinkedList{
     	margaret.add(7);
     	margaret.add(11);
     	margaret.add(2,9); //[10, 5, 9, 7, 11]
-    	margaret.remove(4);
+    	margaret.remove(0);
     	System.out.println(margaret.toString());
     	System.out.println(margaret.indexOf(9));
     }
