@@ -59,6 +59,7 @@ public class MyLinkedList{
     	x+="]";
     	return x;
     }
+    
     public int get (int index){
     	LNode current=start;
     	if (start == null){return 0;}
@@ -67,7 +68,17 @@ public class MyLinkedList{
     	}
     	return current.first;
     }
-    public int set(int index, int newValue){}
+    
+    public int set(int index, int newValue){
+    	LNode current=start;
+    	if (start == null){start = new LNode(newValue);}
+    	for (int i=0; i<index; i++){
+    		current = current.next;
+    	}
+    	int x = current.first;
+    	current.first = newValue;
+    	return x;
+    }
     public int indexOf(int value){}
     public boolean add(int index, int value){}
     public int remove(int index){}
@@ -76,7 +87,8 @@ public class MyLinkedList{
     	MyLinkedList margaret = new MyLinkedList();
     	margaret.add(10);
     	margaret.add(5);
-    	//System.out.println(margaret.toString());
-    	System.out.println(margaret.get(0));
+    	margaret.set(0, 12);
+    	System.out.println(margaret.toString());
+    	//System.out.println(margaret.get(1));
     }
 }
