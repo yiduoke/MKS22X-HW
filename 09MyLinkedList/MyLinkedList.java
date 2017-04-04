@@ -90,12 +90,15 @@ public class MyLinkedList{
     }
     
     public void add(int index, int value){//doubly linked
-	if (index>size){throw new IllegalArgumentException();}
+	if (index>size || index<0){throw new IllegalArgumentException();}
     	LNode thing=new LNode(value);
     	if (index==0){
+	    if (start==null){add(value);}
+	    else{
     		start.prev=thing;
     		thing.next=start;
     		start=thing;
+	    }
     	}
     	else if(index==size){
     		tail.next=thing;
@@ -137,17 +140,12 @@ public class MyLinkedList{
     
     public static void main(String[] args){
     	MyLinkedList margaret = new MyLinkedList();
-    	margaret.add(10);
-    	margaret.add(5);
-    	//margaret.add(9);
-    	margaret.add(7);
-    	margaret.add(11);
-    	margaret.add(2,9);//[10, 5, 9, 7, 11]
+    	margaret.add(0,10);
+    	margaret.add(1,5);
+        margaret.add(1,9);
+    	margaret.add(0,7);
     	margaret.remove(0);
 	MyLinkedList penn = new MyLinkedList();
-	penn.add(10);
-	penn.remove(0);
-	System.out.println(penn);
     	System.out.println(margaret.toString());
     	System.out.println(margaret.indexOf(11));
     }
