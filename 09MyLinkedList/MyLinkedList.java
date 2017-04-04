@@ -25,7 +25,9 @@ public class MyLinkedList{
     }
     public boolean add(int value){//doubly linked
          if (start == null) {
-             start = new LNode(value);
+             LNode thing = new LNode(value);
+             start=thing;
+             tail=thing;
          } 
          else{
              tail=new LNode(value);
@@ -136,7 +138,7 @@ public class MyLinkedList{
     	margaret.add(7);
     	margaret.add(11);
     	margaret.add(2,9);//[10, 5, 9, 7, 11]
-    	margaret.remove(4);
+    	margaret.remove(0);
     	System.out.println(margaret.toString());
     	System.out.println(margaret.indexOf(11));
     }
