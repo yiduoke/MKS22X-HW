@@ -24,7 +24,7 @@ public class MyLinkedList{
     	size=0;
     }
     public boolean add(int value){//doubly linked
-         if (start == null) {
+         if (size==0) {
              LNode thing = new LNode(value);
              start=thing;
              tail=thing;
@@ -53,12 +53,10 @@ public class MyLinkedList{
     
     public String toString(){//won't change
     	String x="[";
-    	LNode current = start;
     	for (int i=0; i<size; i++){
-    		if (i==size-1){x+=current.first;}
+    		if (i==size-1){x+=getNode(i).first;}
     		else{
-    			x+=current.first+", ";
-    			current=current.next;
+    			x+=getNode(i).first+", ";
     		}
     	}
     	x+="]";
@@ -90,38 +88,37 @@ public class MyLinkedList{
     }
     
     public void add(int index, int value){//doubly linked
-	if (index>size || index<0){throw new IllegalArgumentException();}
-    	LNode thing=new LNode(value);
-    	if (index==0){
-	    if (start==null){add(value);}
-	    else{
-    		start.prev=thing;
-    		thing.next=start;
-    		start=thing;
-	    }
-    	}
-    	else if(index==size){
-    		tail.next=thing;
-    		thing.prev=tail;
-    		tail=thing;
-    	}
-    	else{
-    		thing.prev=getNode(index-1);
-    		thing.next=getNode(index);
-    		getNode(index).prev=thing;
-    		getNode(index-1).next=thing;
-    	}
-    	size++;
-    }
+    	if (index>size || index<0){throw new IllegalArgumentException();}
+        	LNode thing=new LNode(value);
+        	if (index==0){
+        		if (size==0){
+                    start=thing;
+                    tail=thing;
+        		}
+        		else{
+        			start.prev=thing;
+        			thing.next=start;
+        			start=thing;
+        		}
+        	}
+        	else if(index==size){
+        		tail.next=thing;
+        		thing.prev=tail;
+        		tail=thing;
+        	}
+        	else{
+        		thing.prev=getNode(index-1);
+        		thing.next=getNode(index);
+        		getNode(index).prev=thing;
+        		getNode(index-1).next=thing;
+        	}
+        	size++;
+        }
     
     public int remove(int index){//doubly linked
     	if (index<0 || index>=size){throw new IllegalArgumentException();}
     	int x=getNode(index).first;
-	if (size==1 && index ==0){
-	    start=null;
-	    tail=null;
-	}
-    	else if (index==0){ 
+    	if (index==0){ 
     		start=start.next;
     		start.prev=null;
     		}
@@ -142,12 +139,12 @@ public class MyLinkedList{
     	MyLinkedList margaret = new MyLinkedList();
     	margaret.add(0,10);
     	margaret.add(1,5);
-        margaret.add(1,9);
-    	margaret.add(0,7);
-    	margaret.remove(0);
-	MyLinkedList penn = new MyLinkedList();
+    	margaret.add(0,0);
+    	//margaret.add(9);
+    	//margaret.add(7);
+    	//margaret.add(11);
+    	//margaret.add(2,9);//[10, 5, 9, 7, 11]
+    	//margaret.remove(0);
     	System.out.println(margaret.toString());
-    	System.out.println(margaret.indexOf(11));
     }
-    
 }
