@@ -113,7 +113,11 @@ public class MyLinkedList{
     public int remove(int index){//doubly linked
     	if (index<0 || index>=size){throw new IllegalArgumentException();}
     	int x=getNode(index).first;
-    	if (index==0){ 
+	if (size==1 && index ==0){
+	    start=null;
+	    tail=null;
+	}
+    	else if (index==0){ 
     		start=start.next;
     		start.prev=null;
     		}
@@ -139,7 +143,12 @@ public class MyLinkedList{
     	margaret.add(11);
     	margaret.add(2,9);//[10, 5, 9, 7, 11]
     	margaret.remove(0);
+	MyLinkedList penn = new MyLinkedList();
+	penn.add(10);
+	penn.remove(0);
+	System.out.println(penn);
     	System.out.println(margaret.toString());
     	System.out.println(margaret.indexOf(11));
     }
+    
 }
