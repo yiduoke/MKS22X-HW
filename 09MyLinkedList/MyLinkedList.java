@@ -90,6 +90,7 @@ public class MyLinkedList{
     }
     
     public void add(int index, int value){//doubly linked
+	if (index>size){throw new IllegalArgumentException();}
     	LNode thing=new LNode(value);
     	if (index==0){
     		start.prev=thing;
