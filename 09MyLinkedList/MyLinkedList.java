@@ -1,4 +1,4 @@
-public class MyLinkedList{
+public class MyLinkedList implements Iterable<Integer>{
 	
     LNode start;
     LNode tail;
@@ -18,6 +18,14 @@ public class MyLinkedList{
 	}
     }
     //inner city--------------------------
+    public Iterable<Integer> iterator(){
+	return new MyLinkedList(this);
+    }
+
+    public class MyLinkedList implements Iterator<Integer>{
+	public integer next(){}
+	public boolean hasNext(){}
+}
     
     public MyLinkedList(){
     	start=null;
