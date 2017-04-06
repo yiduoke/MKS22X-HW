@@ -1,3 +1,6 @@
+import java.util.Iterator;
+import java.util.NoSuchElementException;
+
 public class MyLinkedList implements Iterable<Integer>{
 	
     LNode start;
@@ -6,26 +9,50 @@ public class MyLinkedList implements Iterable<Integer>{
     
     //inner city--------------------------
     class LNode{
-	int first;
+	int value;
 	LNode next=null;
 	LNode prev=null;
 	public LNode(int x, LNode y){
-	    first=x;
+	    value=x;
 	    next=y;
 	}
 	public LNode(int x){
-	    first=x;
+	    value=x;
 	}
     }
     //inner city--------------------------
-    public Iterable<Integer> iterator(){
-	return new MyLinkedList(this);
+    public Iterator<Integer> iterator(){
+    	return new MyLinkedListIterator(this);
     }
-
-    public class MyLinkedList implements Iterator<Integer>{
-	public integer next(){}
-	public boolean hasNext(){}
-}
+    
+    //inner city------------------------------------
+    public class MyLinkedListIterator implements Iterator<Integer>{
+    	public LNode state;
+    	public MyLinkedList listy;
+    	public MyLinkedListIterator(MyLinkedList x){
+    		state=x.start;
+    		listy=x;
+    	}
+    	
+    	public boolean hasNext(){
+    		return state!=tail;
+    	}
+    	
+    	public Integer next(){
+    		if (hasNext()){
+    			state=state.next;
+    			return state.value;
+    		}
+    		else{
+    			throw new NoSuchElementException("No more elements!");
+    		}
+    	}
+    	
+    	public void remove(){
+    		throw new UnsupportedOperationException();
+    	}
+    }
+    //inner city------------------------------------
     
     public MyLinkedList(){
     	start=null;
@@ -62,9 +89,9 @@ public class MyLinkedList implements Iterable<Integer>{
     public String toString(){//won't change
     	String x="[";
     	for (int i=0; i<size; i++){
-    		if (i==size-1){x+=getNode(i).first;}
+    		if (i==size-1){x+=getNode(i).value;}
     		else{
-    			x+=getNode(i).first+", ";
+    			x+=getNode(i).value+", ";
     		}
     	}
     	x+="]";
@@ -77,20 +104,20 @@ public class MyLinkedList implements Iterable<Integer>{
     	for (int i=0; i<index; i++){
     		current = current.next;
     	}
-    	return current.first;
+    	return current.value;
     }
     
     public int set(int index, int newValue){//modified
     	if (start == null){start = new LNode(newValue);}
-    	int x = getNode(index).first;
-    	getNode(index).first = newValue;
+    	int x = getNode(index).value;
+    	getNode(index).value = newValue;
     	return x;
     }
     
     public int indexOf(int value){//modified
     	if (start == null){return -1;}
     	for (int i=0; i<size; i++){
-    		if (getNode(i).first==value){return i;}
+    		if (getNode(i).value==value){return i;}
     	}
     	return -1;
     }
@@ -125,7 +152,7 @@ public class MyLinkedList implements Iterable<Integer>{
     
     public int remove(int index){//doubly linked
     	if (index<0 || index>=size){throw new IllegalArgumentException();}
-    	int x=getNode(index).first;
+    	int x=getNode(index).value;
     	if (index==0){ 
     		start=start.next;
     		start.prev=null;
@@ -148,6 +175,8 @@ public class MyLinkedList implements Iterable<Integer>{
     	margaret.add(0,10);
     	margaret.add(1,5);
     	margaret.add(0,0);
+    	margaret.add(0,6);
+    	margaret.add(1,9);
     	//margaret.add(9);
     	//margaret.add(7);
     	//margaret.add(11);
