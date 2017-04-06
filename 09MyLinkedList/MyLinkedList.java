@@ -27,10 +27,12 @@ public class MyLinkedList implements Iterable<Integer>{
     
     //inner city------------------------------------
     public class MyLinkedListIterator implements Iterator<Integer>{
+    	
     	public LNode state;
     	public MyLinkedList listy;
+    	
     	public MyLinkedListIterator(MyLinkedList x){
-    		state=x.start;
+    		state=null;
     		listy=x;
     	}
     	
@@ -39,13 +41,12 @@ public class MyLinkedList implements Iterable<Integer>{
     	}
     	
     	public Integer next(){
-    		if (hasNext()){
+    		if (state==null){state=start; return state.value;}
+    		else {
     			state=state.next;
     			return state.value;
     		}
-    		else{
-    			throw new NoSuchElementException("No more elements!");
-    		}
+    			//throw new NoSuchElementException("No more elements!");
     	}
     	
     	public void remove(){
@@ -177,11 +178,11 @@ public class MyLinkedList implements Iterable<Integer>{
     	margaret.add(0,0);
     	margaret.add(0,6);
     	margaret.add(1,9);
-    	//margaret.add(9);
-    	//margaret.add(7);
-    	//margaret.add(11);
-    	//margaret.add(2,9);//[10, 5, 9, 7, 11]
-    	//margaret.remove(0);
+    	MyLinkedList penn=new MyLinkedList();
     	System.out.println(margaret.toString());
+    	Iterator x=penn.iterator();
+    	while (x.hasNext()){
+    		System.out.println(""+x.next());
+    	}
     }
 }
