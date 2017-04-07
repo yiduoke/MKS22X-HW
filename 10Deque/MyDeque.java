@@ -23,10 +23,10 @@ public class MyDeque{
     }
 
     public void addLast(String x){
-	try{
-	    deck[end+1]=x;
+	if ((end+1%)deck.length!=start){
+	    deck[(end+1)%deck.length]=x;
 	}
-	catch(ArrayIndexOutOfBoundsException e){
+	else{
 	    String[] temp=new String[deck.length*2];
 	    for (int i=0; i<deck.length; i++){
 		temp[i]=deck[i];
@@ -37,6 +37,13 @@ public class MyDeque{
 	size++;
     }
 
+    public String removeLast(){
+	last=(last-1)%deck.length;
+
+    }
+    public String removeFirst(){
+	first=(first+1)%deck.length;
+    }
     
 
     
