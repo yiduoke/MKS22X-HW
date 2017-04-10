@@ -100,6 +100,7 @@ public class MyLinkedList implements Iterable<Integer>{
     }
     
     public int get(int index){//won't change
+    	if (index>=size || index<0){throw new IllegalArgumentException();}
     	LNode current=start;
     	if (start == null){return 0;}
     	for (int i=0; i<index; i++){
@@ -109,6 +110,7 @@ public class MyLinkedList implements Iterable<Integer>{
     }
     
     public int set(int index, int newValue){//modified
+    	if (index>=size || index<0){throw new IllegalArgumentException();}
     	if (start == null){start = new LNode(newValue);}
     	int x = getNode(index).value;
     	getNode(index).value = newValue;
@@ -179,6 +181,8 @@ public class MyLinkedList implements Iterable<Integer>{
     	margaret.add(0,6);
     	margaret.add(1,9);
     	MyLinkedList penn=new MyLinkedList();
+    	penn.add(0);
+    	penn.add(-1);
     	System.out.println(margaret.toString());
     	Iterator x=penn.iterator();
     	while (x.hasNext()){
