@@ -72,8 +72,8 @@ public class MyDeque{
    
    public String toString(){
 	   String x="";
-	   for (int i=start; i<size; i++){
-		   x+=deck[Math.floorMod(i, deck.length)]+" ";
+	   for (int i=0; i<size; i++){
+		   x+=deck[Math.floorMod(start+i, deck.length)]+" ";
 	   }
 	   return x;
    }
@@ -83,7 +83,8 @@ public class MyDeque{
 	   margaret.addFirst("hola");
 	   margaret.addFirst("hi");
 	   margaret.addLast("hiii");
-	   System.out.println(margaret.deck[Math.floorMod(margaret.start+2, margaret.deck.length)]);
+	   margaret.addLast("meee");
+	   System.out.println(margaret);
    }
    
    
