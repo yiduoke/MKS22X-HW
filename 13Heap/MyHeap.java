@@ -51,6 +51,9 @@ public class MyHeap{
 
     public String remove(){
 	String x=arr[1];
+	for (int i=1; i<=size; i*=2){
+	    
+	}
     }
 }
 
