@@ -50,7 +50,7 @@ public class MyHeap{
     }
 
     public String remove(){
-	
+	String x=arr[1];
     }
 }
 
