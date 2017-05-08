@@ -28,7 +28,7 @@ public class RunningMedian{
 	    return min.peek();
 	}
 	else{
-	    if ((min.size()+max.size()%2!=0){
+	    if ((min.size()+max.size())%2!=0){
 		    if (min.size()>max.size()){
 			return min.peek();
 		    }
@@ -36,13 +36,13 @@ public class RunningMedian{
 			return max.peek();
 		    }
 		}
-	    return (min.peek()+max.peek())/2;
+		return (min.peek()+max.peek())/2;
+		}
 	}
-    }
 
-    public static void main(String[] args){
-	RunningMedian margaret=new RunningMedian();
-	System.out.println(margaret.getMedian());
-    }
+	public static void main(String[] args){
+	    RunningMedian margaret=new RunningMedian();
+	    System.out.println(margaret.getMedian());
+	}
 
-}
+    }
