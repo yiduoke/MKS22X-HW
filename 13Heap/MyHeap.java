@@ -1,24 +1,24 @@
 import java.util.ArrayList;
 
 public class MyHeap {
-	private ArrayList<String> list;
+	private ArrayList<Integer> list;
 	private boolean max;
 	private int size;
 	
 	public MyHeap(){
-		list=new ArrayList<String>();
+		list=new ArrayList<Integer>();
 	}
 	
 	public MyHeap(boolean x){
 		if (x){
 			max=true;
 		}
-		list=new ArrayList<String>();
+		list=new ArrayList<Integer>();
 	}
 	
-	public void add(String x){
+	public void add(Integer x){
 		if (size==0){
-			list.add("");
+			list.add(5);
 			list.add(x);
 			size++;
 			return;
@@ -42,8 +42,8 @@ public class MyHeap {
 		}
 	}
 	
-	public String remove(){
-		String x=list.get(1);
+	public int remove(){
+		int x=list.get(1);
 		int i=1;
 		if (max){
 			while (i<=size/2){
@@ -86,7 +86,7 @@ public class MyHeap {
 		return x;
 	}
 	
-	public String peek(){
+	public Integer peek(){
 		return list.get(1);
 	}
 	
@@ -99,23 +99,9 @@ public class MyHeap {
 	}
 	
 	private void swap(int x, int y){
-		String a=list.get(x);
+		int a=list.get(x);
 		list.set(x, list.get(y));
 		list.set(y, a);
 	}
-	
-	public static void main(String[] args){
-		MyHeap margaret=new MyHeap(false);
-		margaret.add("B");
-		margaret.add("C");
-		margaret.add("D");
-		margaret.add("C");
-		margaret.add("A");
-		margaret.add("A");
-		margaret.add("F");
-		margaret.add("Y");
-		System.out.println(margaret);
-		System.out.println(margaret.remove());
-		System.out.println(margaret);
-	}
+
 }
