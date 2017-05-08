@@ -104,4 +104,8 @@ public class MyHeap {
 		list.set(y, a);
 	}
 
+    public int size(){
+	return size;
+    }
+
 }
