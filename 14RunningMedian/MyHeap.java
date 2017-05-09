@@ -103,7 +103,6 @@ public class MyHeap {
 		list.set(x, list.get(y));
 		list.set(y, a);
 	}
-
     public int size(){
 	return size;
     }
