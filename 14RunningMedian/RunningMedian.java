@@ -15,6 +15,15 @@ public class RunningMedian{
 	else{
 	    min.add(x);
 	}
+
+	if (Math.abs(min.size()-max.size())>1){
+	    if (min.size()>max.size()){
+		max.add(min.remove());
+	    }
+	    else{
+		min.add(max.remove());
+	    }
+ 	}
     }
 
     public double getMedian(){
@@ -28,21 +37,28 @@ public class RunningMedian{
 	    return min.peek();
 	}
 	else{
-	    if ((min.size()+max.size())%2!=0){
-		    if (min.size()>max.size()){
-			return min.peek();
-		    }
-		    else{
-			return max.peek();
-		    }
+	    if ((min.size()+max.size())%2==1){
+		if (min.size()>max.size()){
+		    return min.peek();
 		}
-		return (min.peek()+max.peek())/2;
+		else{
+		    return max.peek();
 		}
+	    }
+	    else{
+		return (min.peek()+max.peek())/2.0;
+	    }
 	}
+    }
 
 	public static void main(String[] args){
 	    RunningMedian margaret=new RunningMedian();
-	    System.out.println(margaret.getMedian());
+	    margaret.add(5);
+	    margaret.add(2);
+	    margaret.add(3);
+	    margaret.add(1);
+	    System.out.println(margaret.min);
+	    System.out.println(margaret.max);
 	}
 
     }
