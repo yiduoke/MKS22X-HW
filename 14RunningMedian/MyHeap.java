@@ -44,41 +44,30 @@ public class MyHeap {
 	
 	public int remove(){
 		int x=list.get(1);
+		list.set(1, list.get(size));
 		int i=1;
 		if (max){
 			while (i<=size/2){
-				if (i==size/2 && size%2==0){
-					list.set(i,list.get(i*2));
-					size--;
-					return x;
-				}
 				if (list.get(i*2).compareTo(list.get(i*2+1))>=0){
-					list.set(i, list.get(i*2));
+					swap(i,i*2);
 					i*=2;
 				}
 				else{
-					list.set(i, list.get(i*2+1));
+					swap(i,i*2+1);
 					i=i*2+1;
 				}
-				//list.set(i, list.get(i*2));	
 			}
 		}
 		else{
 			while (i<=size/2){
-				if (i==size/2 && size%2==0){
-					list.set(i,list.get(i*2));
-					size--;
-			    	return x;
-				}
 				if (list.get(i*2).compareTo(list.get(i*2+1))<=0){
-					list.set(i, list.get(i*2));
+					swap(i,i*2);
 					i*=2;
 				}
 				else{
-					list.set(i, list.get(i*2+1));
+					swap(i,i*2+1);
 					i=i*2+1;
 				}
-				//list.set(i, list.get(i*2));
 				
 			}
 		}
@@ -107,4 +96,14 @@ public class MyHeap {
 	return size;
     }
 
+    public static void main(String[] args){
+	    MyHeap margaret=new MyHeap(true);
+	    margaret.add(3);
+	    margaret.add(2);
+	    margaret.add(1);
+	    System.out.println(margaret);
+	    System.out.println(margaret.remove());
+	    System.out.println(margaret);
+	    
+	}
 }
