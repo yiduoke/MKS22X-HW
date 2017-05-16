@@ -24,6 +24,11 @@ public class Location implements Comparable<Location>{
     }
 
     public int compareTo(Location other){
-	
+	if (aStar){
+	    (distanceToGoal+distanceToStart)-(other.distanceToGoal()+other.distanceToStart());
+	}
+	else{
+	    distanceToStart-other.distanceToStart();
+	}
     }
 }
