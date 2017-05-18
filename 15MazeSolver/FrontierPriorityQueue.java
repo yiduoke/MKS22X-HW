@@ -5,6 +5,6 @@ public class FrontierPriorityQueue{
 	PQ.add(x);
     }
     public Location next(){
-	return PQ.next();
+	return PQ.remove();
     }
 }
