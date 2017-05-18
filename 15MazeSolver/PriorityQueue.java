@@ -7,13 +7,7 @@ public class PriorityQueue{
 	
 	public PriorityQueue(){
 		list=new ArrayList<Location>();
-	}
-	
-	public PriorityQueue(boolean x){
-		if (x){
-			max=true;
-		}
-		list=new ArrayList<Location>();
+		max=false;
 	}
 	
 	public void add(Location x){
