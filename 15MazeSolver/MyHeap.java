@@ -1,24 +1,24 @@
 import java.util.ArrayList;
 
-public class PriorityQueue{
-	private ArrayList<Location> list;
+public class MyHeap {
+	private ArrayList<Integer> list;
 	private boolean max;
 	private int size;
 	
-	public PriorityQueue(){
-		list=new ArrayList<Location>();
+	public MyHeap(){
+		list=new ArrayList<Integer>();
 	}
 	
-	public PriorityQueue(boolean x){
+	public MyHeap(boolean x){
 		if (x){
 			max=true;
 		}
-		list=new ArrayList<Location>();
+		list=new ArrayList<Integer>();
 	}
 	
-	public void add(Location x){
+	public void add(Integer x){
 		if (size==0){
-			list.add(null);
+			list.add(5);
 			list.add(x);
 			size++;
 			return;
@@ -42,32 +42,43 @@ public class PriorityQueue{
 		}
 	}
 	
-	public Location remove(){
-		Location x=list.get(1);
-		list.set(1, list.get(size));
+	public int remove(){
+		int x=list.get(1);
 		int i=1;
 		if (max){
 			while (i<=size/2){
+				if (i==size/2 && size%2==0){
+					list.set(i,list.get(i*2));
+					size--;
+					return x;
+				}
 				if (list.get(i*2).compareTo(list.get(i*2+1))>=0){
-					swap(i,i*2);
+					list.set(i, list.get(i*2));
 					i*=2;
 				}
 				else{
-					swap(i,i*2+1);
+					list.set(i, list.get(i*2+1));
 					i=i*2+1;
 				}
+				//list.set(i, list.get(i*2));	
 			}
 		}
 		else{
 			while (i<=size/2){
+				if (i==size/2 && size%2==0){
+					list.set(i,list.get(i*2));
+					size--;
+			    	return x;
+				}
 				if (list.get(i*2).compareTo(list.get(i*2+1))<=0){
-					swap(i,i*2);
+					list.set(i, list.get(i*2));
 					i*=2;
 				}
 				else{
-					swap(i,i*2+1);
+					list.set(i, list.get(i*2+1));
 					i=i*2+1;
 				}
+				//list.set(i, list.get(i*2));
 				
 			}
 		}
@@ -75,7 +86,7 @@ public class PriorityQueue{
 		return x;
 	}
 	
-	public Location peek(){
+	public Integer peek(){
 		return list.get(1);
 	}
 	
@@ -88,11 +99,12 @@ public class PriorityQueue{
 	}
 	
 	private void swap(int x, int y){
-		Location a=list.get(x);
+		int a=list.get(x);
 		list.set(x, list.get(y));
 		list.set(y, a);
 	}
     public int size(){
 	return size;
     }
+
 }
