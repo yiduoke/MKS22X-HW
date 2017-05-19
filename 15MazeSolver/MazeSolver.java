@@ -13,7 +13,9 @@ public class MazeSolver {
 	}
 	
 	public void solve(int style){
-		
+		if (style==0){
+			solveDepth();
+		}
 	}
 	
 	private void solveDepth(){
@@ -34,6 +36,29 @@ public class MazeSolver {
 					pancakes.add(nextLocation);
 					maze.set(nextX, nextY, '.');
 					pancakes.next();
+				}
+			}
+		}
+	}
+	
+	private void solveBreadth(){
+		QueueFrontier line=new QueueFrontier();
+		line.add(maze.getStart());
+		int currentX=maze.getStart().getX();
+		int currentY=maze.getStart().getY();
+		Location currentLocation=line.peek();
+		
+		while (line.peek()!=maze.getEnd() && line.size()!=0){
+			int[] xMove={0,0,-1,1};
+			int[] yMove={1,-1,0,0};
+			for (int i=0; i<4; i++){
+				int nextX=currentX+xMove[i];
+				int nextY=currentY+yMove[i];
+				if (maze.get(nextX, nextY)==' '){
+					Location nextLocation=new Location(nextX,nextY,currentLocation,currentLocation.distanceToStart(), currentLocation.distanceToGoal());
+					line.add(nextLocation);
+					maze.set(nextX,nextY,'.');
+					line.next();
 				}
 			}
 		}
