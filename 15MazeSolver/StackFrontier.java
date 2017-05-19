@@ -15,4 +15,11 @@ public class StackFrontier implements Frontier{
 		return Locations.pop();
 	}
 	
+	public Location peek(){
+		return Locations.peek();
+	}
+	
+	public int size(){
+		return Locations.size();
+	}
 }

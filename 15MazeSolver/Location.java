@@ -33,10 +33,18 @@ public class Location implements Comparable<Location>{
     }
 
     public int distanceToStart(){
-	return distanceToStart;
+    	return distanceToStart;
     }
 
     public int distanceToGoal(){
-	return distanceToGoal;
+    	return distanceToGoal;
+    }
+    
+    public int getX(){
+    	return row;
+    }
+    
+    public int getY(){
+    	return col;
     }
 }
