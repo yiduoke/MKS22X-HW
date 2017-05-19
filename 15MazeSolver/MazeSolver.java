@@ -43,7 +43,7 @@ public class MazeSolver {
 				int nextX=currentX+xMove[i];
 				int nextY=currentY+yMove[i];
 				if (maze.get(nextX, nextY)==' '){
-					Location nextLocation=new Location(nextX,nextY,currentLocation,currentLocation.distanceToStart(), currentLocation.distanceToGoal());
+					Location nextLocation=new Location(nextX,nextY,currentLocation,distanceToStart(currentX,currentY,maze.getStart().getX(),maze.getStart().getY()), distanceToGoal(currentX,currentY,maze.getEnd().getX(),maze.getEnd().getY()));
 					pancakes.add(nextLocation);
 					maze.set(nextX, nextY, '.');
 					pancakes.next();
@@ -69,7 +69,7 @@ public class MazeSolver {
 				int nextX=currentX+xMove[i];
 				int nextY=currentY+yMove[i];
 				if (maze.get(nextX, nextY)==' '){
-					Location nextLocation=new Location(nextX,nextY,currentLocation,currentLocation.distanceToStart(), currentLocation.distanceToGoal());
+					Location nextLocation=new Location(nextX,nextY,currentLocation,distanceToStart(currentX,currentY,maze.getStart().getX(),maze.getStart().getY()), distanceToGoal(currentX,currentY,maze.getEnd().getX(),maze.getEnd().getY()));
 					line.add(nextLocation);
 					maze.set(nextX,nextY,'.');
 					line.next();
@@ -91,19 +91,12 @@ public class MazeSolver {
 			}
 			int[] xMove={0,0,-1,1};
 			int[] yMove={1,-1,0,0};
-			int[] distances={0,0,0,0};
 			
 			for (int i=0; i<4; i++){
 				int nextX=currentX+xMove[i];
 				int nextY=currentY+yMove[i];
-				distances[i]=distanceToGoal(nextX, nextY, maze.getEnd().getX(), maze.getEnd().getY());//do the tens place thing// fix thissss
-			}
-			Arrays.sort(distances);
-			for (int i=0; i<4; i++){
-				int nextX=currentX+xMove[i];
-				int nextY=currentY+yMove[i];
 				if (maze.get(nextX, nextY)==' '){
-					Location nextLocation=new Location(nextX,nextY,currentLocation,currentLocation.distanceToStart(), currentLocation.distanceToGoal());
+					Location nextLocation=new Location(nextX,nextY,currentLocation,distanceToStart(currentX,currentY,maze.getStart().getX(),maze.getStart().getY()), distanceToGoal(currentX,currentY,maze.getEnd().getX(),maze.getEnd().getY()));
 					line.add(nextLocation);
 					maze.set(nextX, nextY, '.');
 					line.next();
@@ -125,14 +118,12 @@ public class MazeSolver {
 			}
 			int[] xMove={0,0,-1,1};
 			int[] yMove={1,-1,0,0};
-			int[] distances={0,0,0,0};
 			
 			for (int i=0; i<4; i++){
 				int nextX=currentX+xMove[i];
 				int nextY=currentY+yMove[i];
-				distances[i]=distanceToGoal(nextX, nextY, maze.getEnd().getX(), maze.getEnd().getY());
 				if (maze.get(nextX, nextY)==' '){
-					Location nextLocation=new Location(nextX,nextY,currentLocation,currentLocation.distanceToStart(), currentLocation.distanceToGoal());
+					Location nextLocation=new Location(nextX,nextY,currentLocation,distanceToStart(currentX,currentY,maze.getStart().getX(),maze.getStart().getY()), distanceToGoal(currentX,currentY,maze.getEnd().getX(),maze.getEnd().getY()),true);
 					line.add(nextLocation);
 					maze.set(nextX, nextY, '.');
 					line.next();
@@ -141,11 +132,11 @@ public class MazeSolver {
 		}
 	}
 	
-	public int distanceToGoal(int x, int y, int a, int b){
+	public int distanceToStart(int x, int y, int a, int b){
 		return Math.abs(x-a)+Math.abs(y-b);
 	}
 	
-	public int distanceStar(int x, int y, int a, int b, int c, int d){
-		return Math.abs(x-a)+Math.abs(y-b)+Math.abs(x-c)+Math.abs(y-d);
+	public int distanceToGoal(int x, int y, int a, int b){
+		return Math.abs(x-a)+Math.abs(y-b);
 	}
 }
