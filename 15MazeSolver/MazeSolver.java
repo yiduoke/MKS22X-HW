@@ -1,3 +1,4 @@
+import java.util.Arrays;
 
 public class MazeSolver {
 	private Maze maze;
@@ -16,6 +17,13 @@ public class MazeSolver {
 		if (style==0){
 			solveDepth();
 		}
+		else if(style==1){
+			solveBreadth();
+		}
+		else if(style==2){
+			solveBest();
+		}
+		else{}
 	}
 	
 	private void solveDepth(){
@@ -26,6 +34,9 @@ public class MazeSolver {
 		Location currentLocation=pancakes.peek();
 		
 		while (pancakes.peek()!=maze.getEnd() && pancakes.size()!=0){
+			if (animate){
+				System.out.println(maze.toString());
+			}
 			int[] xMove={0,0,-1,1};
 			int[] yMove={1,-1,0,0};
 			for (int i=0; i<4; i++){
@@ -49,6 +60,9 @@ public class MazeSolver {
 		Location currentLocation=line.peek();
 		
 		while (line.peek()!=maze.getEnd() && line.size()!=0){
+			if (animate){
+				System.out.println(maze.toString());
+			}
 			int[] xMove={0,0,-1,1};
 			int[] yMove={1,-1,0,0};
 			for (int i=0; i<4; i++){
@@ -62,5 +76,76 @@ public class MazeSolver {
 				}
 			}
 		}
+	}
+	
+	public void solveBest(){
+		FrontierPriorityQueue line=new FrontierPriorityQueue();
+		line.add(maze.getStart());
+		int currentX=maze.getStart().getX();
+		int currentY=maze.getStart().getY();
+		Location currentLocation=line.peek();
+		
+		while (line.peek()!=maze.getEnd() && line.size()!=0){
+			if (animate){
+				System.out.println(maze.toString());
+			}
+			int[] xMove={0,0,-1,1};
+			int[] yMove={1,-1,0,0};
+			int[] distances={0,0,0,0};
+			
+			for (int i=0; i<4; i++){
+				int nextX=currentX+xMove[i];
+				int nextY=currentY+yMove[i];
+				distances[i]=distanceToGoal(nextX, nextY, maze.getEnd().getX(), maze.getEnd().getY());//do the tens place thing// fix thissss
+			}
+			Arrays.sort(distances);
+			for (int i=0; i<4; i++){
+				int nextX=currentX+xMove[i];
+				int nextY=currentY+yMove[i];
+				if (maze.get(nextX, nextY)==' '){
+					Location nextLocation=new Location(nextX,nextY,currentLocation,currentLocation.distanceToStart(), currentLocation.distanceToGoal());
+					line.add(nextLocation);
+					maze.set(nextX, nextY, '.');
+					line.next();
+				}
+			}
+		}
+	}
+	
+	public void solveStar(){
+		FrontierPriorityQueue line=new FrontierPriorityQueue();
+		line.add(maze.getStart());
+		int currentX=maze.getStart().getX();
+		int currentY=maze.getStart().getY();
+		Location currentLocation=line.peek();
+		
+		while (line.peek()!=maze.getEnd() && line.size()!=0){
+			if (animate){
+				System.out.println(maze.toString());
+			}
+			int[] xMove={0,0,-1,1};
+			int[] yMove={1,-1,0,0};
+			int[] distances={0,0,0,0};
+			
+			for (int i=0; i<4; i++){
+				int nextX=currentX+xMove[i];
+				int nextY=currentY+yMove[i];
+				distances[i]=distanceToGoal(nextX, nextY, maze.getEnd().getX(), maze.getEnd().getY());
+				if (maze.get(nextX, nextY)==' '){
+					Location nextLocation=new Location(nextX,nextY,currentLocation,currentLocation.distanceToStart(), currentLocation.distanceToGoal());
+					line.add(nextLocation);
+					maze.set(nextX, nextY, '.');
+					line.next();
+				}
+			}
+		}
+	}
+	
+	public int distanceToGoal(int x, int y, int a, int b){
+		return Math.abs(x-a)+Math.abs(y-b);
+	}
+	
+	public int distanceStar(int x, int y, int a, int b, int c, int d){
+		return Math.abs(x-a)+Math.abs(y-b)+Math.abs(x-c)+Math.abs(y-d);
 	}
 }
