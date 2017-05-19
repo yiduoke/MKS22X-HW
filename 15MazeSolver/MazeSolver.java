@@ -23,7 +23,9 @@ public class MazeSolver {
 		else if(style==2){
 			solveBest();
 		}
-		else{}
+		else{
+			solveStar();
+		}
 	}
 	
 	private void solveDepth(){
