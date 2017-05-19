@@ -1,10 +1,15 @@
-public class FrontierPriorityQueue{
-    private PriorityQueue<Location> PQ;
+public class FrontierPriorityQueue implements Frontier{
+    private PriorityQueue Locations;
+    
+    public FrontierPriorityQueue(){
+    	Locations=new PriorityQueue();
+    }
 
     public void add(Location x){
-	PQ.add(x);
+    	Locations.add(x);
     }
+    
     public Location next(){
-	return PQ.remove();
+    	return Locations.remove();
     }
 }
