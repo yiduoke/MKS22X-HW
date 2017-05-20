@@ -154,6 +154,6 @@ public class MazeSolver {
 	
 	public static void main(String[] args){
 		MazeSolver margaret=new MazeSolver("data1.txt",true);
-		margaret.solve(0);
+		margaret.solve(3);
 	}
 }

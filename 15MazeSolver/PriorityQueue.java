@@ -42,14 +42,13 @@ public class PriorityQueue{
 		else{
 			while (i<=size/2){
 				if (list.get(i*2).compareTo(list.get(i*2+1))<=0){
-					swap(i,i*2);
+					//swap(i,i*2);
 					i*=2;
 				}
 				else{
-					swap(i,i*2+1);
+					//swap(i,i*2+1);
 					i=i*2+1;
-				}
-				
+				}			
 			}
 		}
 		size--;
