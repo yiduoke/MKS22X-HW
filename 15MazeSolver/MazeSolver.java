@@ -40,7 +40,7 @@ public class MazeSolver {
 			Location current=pancakes.next();
 			maze.set(current.getX(), current.getY(), '.');
 			if (maze.getEnd().getX()==current.getX()&& maze.getEnd().getY()==current.getY()){
-				maze.set(current.getX(),current.getY(), '.');
+				maze.set(current.getX(),current.getY(), 'E');
 				return;
 			}
 			
@@ -69,7 +69,7 @@ public class MazeSolver {
 			Location current=people.next();
 			maze.set(current.getX(), current.getY(), '.');
 			if (maze.getEnd().getX()==current.getX()&& maze.getEnd().getY()==current.getY()){
-				maze.set(current.getX(),current.getY(), '.');
+				maze.set(current.getX(),current.getY(), 'E');
 				return;
 			}
 			
@@ -99,7 +99,7 @@ public class MazeSolver {
 			maze.set(current.getX(), current.getY(), '.');
 			
 			if (maze.getEnd().getX()==current.getX()&& maze.getEnd().getY()==current.getY()){
-				maze.set(current.getX(),current.getY(), '.');
+				maze.set(current.getX(),current.getY(), 'E');
 				return;
 			}
 			
@@ -154,6 +154,6 @@ public class MazeSolver {
 	
 	public static void main(String[] args){
 		MazeSolver margaret=new MazeSolver("data1.txt",true);
-		margaret.solve(3);
+		margaret.solve(0);
 	}
 }
