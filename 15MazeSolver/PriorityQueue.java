@@ -7,33 +7,20 @@ public class PriorityQueue{
 	
 	public PriorityQueue(){
 		list=new ArrayList<Location>();
+		list.add(null);
 		max=false;
 	}
 	
 	public void add(Location x){
-		if (size==0){
-			list.add(null);
-			list.add(x);
-			size++;
-			return;
+		list.add(x);
+		size++;
+		int i=size;	
+		while (i>1 && list.get(i).compareTo(list.get(i/2))<0){
+			//swap(i,i/2);
+			list.set(i, list.get(i/2));
+			i/=2;
 		}
-		else{
-			list.add(x);
-			size++;
-		}
-		int i=size;
-		if (max){
-			while (list.get(i).compareTo(list.get(i/2))>0 && i>1){
-				swap(i,i/2);
-				i/=2;
-			}
-		}
-		else{
-			while (list.get(i).compareTo(list.get(i/2))<0 && i>1){
-				swap(i,i/2);
-				i/=2;
-			}
-		}
+		list.set(i,x);
 	}
 	
 	public Location remove(){

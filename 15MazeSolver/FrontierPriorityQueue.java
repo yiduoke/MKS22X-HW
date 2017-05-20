@@ -13,10 +13,6 @@ public class FrontierPriorityQueue implements Frontier{
     	return Locations.remove();
     }
     
-    public Location peek(){
-    	return Locations.peek();
-    }
-    
     public int size(){
     	return Locations.size();
     }

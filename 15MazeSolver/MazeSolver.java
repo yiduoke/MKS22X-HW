@@ -31,104 +31,116 @@ public class MazeSolver {
 	private void solveDepth(){
 		StackFrontier pancakes=new StackFrontier();
 		pancakes.add(maze.getStart());
-		int currentX=maze.getStart().getX();
-		int currentY=maze.getStart().getY();
-		Location currentLocation=pancakes.peek();
 		
-		while (pancakes.peek()!=maze.getEnd() && pancakes.size()!=0){
+		while (pancakes.size()!=0){
 			if (animate){
 				System.out.println(maze.toString());
 			}
+			
+			Location current=pancakes.next();
+			maze.set(current.getX(), current.getY(), '.');
+			if (maze.getEnd().getX()==current.getX()&& maze.getEnd().getY()==current.getY()){
+				maze.set(current.getX(),current.getY(), '.');
+				return;
+			}
+			
 			int[] xMove={0,0,-1,1};
 			int[] yMove={1,-1,0,0};
 			for (int i=0; i<4; i++){
-				int nextX=currentX+xMove[i];
-				int nextY=currentY+yMove[i];
+				int nextX=current.getX()+xMove[i];
+				int nextY=current.getY()+yMove[i];
 				if (maze.get(nextX, nextY)==' '){
-					Location nextLocation=new Location(nextX,nextY,currentLocation,distanceToStart(currentX,currentY,maze.getStart().getX(),maze.getStart().getY()), distanceToGoal(currentX,currentY,maze.getEnd().getX(),maze.getEnd().getY()));
+					Location nextLocation=new Location(nextX,nextY,current,0,0);
 					pancakes.add(nextLocation);
-					maze.set(nextX, nextY, '.');
-					pancakes.next();
 				}
 			}
 		}
 	}
 	
 	private void solveBreadth(){
-		QueueFrontier line=new QueueFrontier();
-		line.add(maze.getStart());
-		int currentX=maze.getStart().getX();
-		int currentY=maze.getStart().getY();
-		Location currentLocation=line.peek();
+		QueueFrontier people=new QueueFrontier();
+		people.add(maze.getStart());
 		
-		while (line.peek()!=maze.getEnd() && line.size()!=0){
+		while (people.size()!=0){
 			if (animate){
 				System.out.println(maze.toString());
 			}
+			
+			Location current=people.next();
+			maze.set(current.getX(), current.getY(), '.');
+			if (maze.getEnd().getX()==current.getX()&& maze.getEnd().getY()==current.getY()){
+				maze.set(current.getX(),current.getY(), '.');
+				return;
+			}
+			
 			int[] xMove={0,0,-1,1};
 			int[] yMove={1,-1,0,0};
 			for (int i=0; i<4; i++){
-				int nextX=currentX+xMove[i];
-				int nextY=currentY+yMove[i];
+				int nextX=current.getX()+xMove[i];
+				int nextY=current.getY()+yMove[i];
 				if (maze.get(nextX, nextY)==' '){
-					Location nextLocation=new Location(nextX,nextY,currentLocation,distanceToStart(currentX,currentY,maze.getStart().getX(),maze.getStart().getY()), distanceToGoal(currentX,currentY,maze.getEnd().getX(),maze.getEnd().getY()));
-					line.add(nextLocation);
-					maze.set(nextX,nextY,'.');
-					line.next();
+					Location nextLocation=new Location(nextX,nextY,current,0,0);
+					people.add(nextLocation);
 				}
 			}
 		}
 	}
 	
 	public void solveBest(){
-		FrontierPriorityQueue line=new FrontierPriorityQueue();
-		line.add(maze.getStart());
-		int currentX=maze.getStart().getX();
-		int currentY=maze.getStart().getY();
-		Location currentLocation=line.peek();
+		FrontierPriorityQueue richPeople=new FrontierPriorityQueue();
+		richPeople.add(maze.getStart());
 		
-		while (line.peek()!=maze.getEnd() && line.size()!=0){
+		while (richPeople.size()!=0){
 			if (animate){
 				System.out.println(maze.toString());
 			}
-			int[] xMove={0,0,-1,1};
-			int[] yMove={1,-1,0,0};
+			Location current=richPeople.next();
 			
+			maze.set(current.getX(), current.getY(), '.');
+			
+			if (maze.getEnd().getX()==current.getX()&& maze.getEnd().getY()==current.getY()){
+				maze.set(current.getX(),current.getY(), '.');
+				return;
+			}
+			
+			int[] xMove={0,0,-1,1};
+			int[] yMove={1,-1,0,0};		
 			for (int i=0; i<4; i++){
-				int nextX=currentX+xMove[i];
-				int nextY=currentY+yMove[i];
+				int nextX=current.getX()+xMove[i];
+				int nextY=current.getY()+yMove[i];
 				if (maze.get(nextX, nextY)==' '){
-					Location nextLocation=new Location(nextX,nextY,currentLocation,distanceToStart(currentX,currentY,maze.getStart().getX(),maze.getStart().getY()), distanceToGoal(currentX,currentY,maze.getEnd().getX(),maze.getEnd().getY()));
-					line.add(nextLocation);
-					maze.set(nextX, nextY, '.');
-					line.next();
+					Location nextLocation=new Location(nextX,nextY,current,0, distanceToGoal(current.getX(),current.getY(),maze.getEnd().getX(),maze.getEnd().getY()));
+					richPeople.add(nextLocation);
 				}
 			}
 		}
 	}
 	
 	public void solveStar(){
-		FrontierPriorityQueue line=new FrontierPriorityQueue();
-		line.add(maze.getStart());
-		int currentX=maze.getStart().getX();
-		int currentY=maze.getStart().getY();
-		Location currentLocation=line.peek();
+		FrontierPriorityQueue tycoons=new FrontierPriorityQueue();
+		tycoons.add(maze.getStart());
 		
-		while (line.peek()!=maze.getEnd() && line.size()!=0){
+		while (tycoons.size()!=0){
 			if (animate){
 				System.out.println(maze.toString());
 			}
-			int[] xMove={0,0,-1,1};
-			int[] yMove={1,-1,0,0};
+			Location current=tycoons.next();
+			maze.set(current.getX(), current.getY(), '.');
+			if (maze.getEnd().getX()==current.getX()&& maze.getEnd().getY()==current.getY()){
+				maze.set(current.getX(),current.getY(), '.');
+				return;
+			}
 			
+			int[] xMove={0,0,-1,1};
+			int[] yMove={1,-1,0,0};		
 			for (int i=0; i<4; i++){
-				int nextX=currentX+xMove[i];
-				int nextY=currentY+yMove[i];
+				int nextX=current.getX()+xMove[i];
+				int nextY=current.getY()+yMove[i];
 				if (maze.get(nextX, nextY)==' '){
-					Location nextLocation=new Location(nextX,nextY,currentLocation,distanceToStart(currentX,currentY,maze.getStart().getX(),maze.getStart().getY()), distanceToGoal(currentX,currentY,maze.getEnd().getX(),maze.getEnd().getY()),true);
-					line.add(nextLocation);
+					Location nextLocation=new Location(nextX,nextY,current,distanceToStart(current.getX(),current.getY(),maze.getStart().getX(),maze.getStart().getY()), distanceToGoal(current.getX(),current.getY(),maze.getEnd().getX(),maze.getEnd().getY()),true);
+					tycoons.add(nextLocation);
 					maze.set(nextX, nextY, '.');
-					line.next();
+					tycoons.next();
 				}
 			}
 		}
@@ -140,5 +152,10 @@ public class MazeSolver {
 	
 	public int distanceToGoal(int x, int y, int a, int b){
 		return Math.abs(x-a)+Math.abs(y-b);
+	}
+	
+	public static void main(String[] args){
+		MazeSolver margaret=new MazeSolver("data1.txt",true);
+		margaret.solve(2);
 	}
 }
