@@ -2,13 +2,11 @@ import java.util.ArrayList;
 
 public class PriorityQueue{
 	private ArrayList<Location> list;
-	private boolean max;
 	private int size;
 	
 	public PriorityQueue(){
 		list=new ArrayList<Location>();
 		list.add(new Location(200, 200, null, 200, 200));
-		max=false;
 	}
 	
 	public void add(Location x){
@@ -16,7 +14,6 @@ public class PriorityQueue{
 		size++;
 		int i=size;	
 		while (i>1 && x.compareTo(list.get(i/2))<0){
-			//swap(i,i/2);
 			list.set(i, list.get(i/2));
 			i/=2;
 		}
@@ -27,21 +24,19 @@ public class PriorityQueue{
 		Location x=list.get(1);
 		list.set(1, list.get(size));
 		size--;
-		int i=1;
-			while (i<=size/2){
-				if (list.get(i*2).compareTo(list.get(i*2+1))<=0){
-					swap(i,i*2);
-					i*=2;
-				}
-				else{
-					swap(i,i*2+1);
-					i=i*2+1;
-				}			
+		Location temp=list.get(1);
+		int child;
+		for (int i=1; 2*i<=size; i=child){
+			child=2*i;
+			if (child!=size && list.get(child).compareTo(list.get(child+1))>0){
+				child++;
 			}
-		//size--;
+			if (temp.compareTo(list.get(child))>0){
+				list.set(i,list.get(child));
+			}
+		}
+		list.set(1,temp);
 		return x;
-		//Location x=list.get(1);
-		//list.set()
 	}
 	
 	public Location peek(){
@@ -56,11 +51,6 @@ public class PriorityQueue{
 		return x;
 	}
 	
-	private void swap(int x, int y){
-		Location a=list.get(x);
-		list.set(x, list.get(y));
-		list.set(y, a);
-	}
     public int size(){
 	return size;
     }

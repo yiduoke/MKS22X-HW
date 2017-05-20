@@ -39,8 +39,7 @@ public class MazeSolver {
 			
 			Location current=pancakes.next();
 			maze.set(current.getX(), current.getY(), '.');
-			if (maze.getEnd().getX()==current.getX()&& maze.getEnd().getY()==current.getY()){
-				maze.set(current.getX(),current.getY(), 'E');
+			if (maze.getEnd().getX()==current.getX()&& maze.getEnd().getY()==current.getY()){	
 				return;
 			}
 			
@@ -68,8 +67,7 @@ public class MazeSolver {
 			
 			Location current=people.next();
 			maze.set(current.getX(), current.getY(), '.');
-			if (maze.getEnd().getX()==current.getX()&& maze.getEnd().getY()==current.getY()){
-				maze.set(current.getX(),current.getY(), 'E');
+			if (maze.getEnd().getX()==current.getX()&& maze.getEnd().getY()==current.getY()){	
 				return;
 			}
 			
@@ -98,8 +96,7 @@ public class MazeSolver {
 			
 			maze.set(current.getX(), current.getY(), '.');
 			
-			if (maze.getEnd().getX()==current.getX()&& maze.getEnd().getY()==current.getY()){
-				maze.set(current.getX(),current.getY(), 'E');
+			if (maze.getEnd().getX()==current.getX()&& maze.getEnd().getY()==current.getY()){	
 				return;
 			}
 			
@@ -127,7 +124,6 @@ public class MazeSolver {
 			Location current=tycoons.next();
 			maze.set(current.getX(), current.getY(), '.');
 			if (maze.getEnd().getX()==current.getX()&& maze.getEnd().getY()==current.getY()){
-				maze.set(current.getX(),current.getY(), 'E');
 				return;
 			}
 			
@@ -150,10 +146,5 @@ public class MazeSolver {
 	
 	public int distanceToGoal(int x, int y, int a, int b){
 		return Math.abs(x-a)+Math.abs(y-b);
-	}
-	
-	public static void main(String[] args){
-		MazeSolver margaret=new MazeSolver("data1.txt",true);
-		margaret.solve(2);
 	}
 }
