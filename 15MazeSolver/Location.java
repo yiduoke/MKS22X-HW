@@ -28,7 +28,7 @@ public class Location implements Comparable<Location>{
 	    return (distanceToGoal+distanceToStart)-(other.distanceToGoal()+other.distanceToStart());
 	}
 	else{
-	    return distanceToStart-other.distanceToStart();
+	    return distanceToGoal-other.distanceToGoal();
 	}
     }
 
@@ -38,6 +38,10 @@ public class Location implements Comparable<Location>{
 
     public int distanceToGoal(){
     	return distanceToGoal;
+    }
+    
+    public Location previous(){
+    	return previous;
     }
     
     public int getX(){

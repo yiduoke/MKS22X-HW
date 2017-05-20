@@ -24,19 +24,25 @@ public class PriorityQueue{
 		Location x=list.get(1);
 		list.set(1, list.get(size));
 		size--;
-		Location temp=list.get(1);
-		int child;
-		for (int i=1; 2*i<=size; i=child){
-			child=2*i;
-			if (child!=size && list.get(child).compareTo(list.get(child+1))>0){
-				child++;
+		int i=1;
+		while (i<=size/2){
+			if (list.get(i*2).compareTo(list.get(i*2+1))<=0){
+				swap(i,i*2);
+				i*=2;
 			}
-			if (temp.compareTo(list.get(child))>0){
-				list.set(i,list.get(child));
+			else{
+				swap(i,i*2+1);
+				i=i*2+1;
 			}
+			
 		}
-		list.set(1,temp);
 		return x;
+	}
+	
+	private void swap(int x, int y){
+		Location a=list.get(x);
+		list.set(x, list.get(y));
+		list.set(y, a);
 	}
 	
 	public Location peek(){
@@ -46,7 +52,7 @@ public class PriorityQueue{
 	public String toString(){
 		String x="";
 		for (int i=1; i<=size; i++){
-			x+=list.get(i)+" ";
+			x+=list.get(i).distanceToGoal()+"; "+(list.get(i).distanceToStart()+list.get(i).distanceToGoal()+"\n");
 		}
 		return x;
 	}
