@@ -28,6 +28,14 @@ public class MazeSolver {
 		}
 	}
 	
+	public void solve(){
+		solve(1);
+	}
+	
+	public String toString(){
+		return maze.toString();
+	}
+	
 	private void solveDepth(){
 		StackFrontier pancakes=new StackFrontier();
 		pancakes.add(maze.getStart());
