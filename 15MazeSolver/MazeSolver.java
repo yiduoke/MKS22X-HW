@@ -127,7 +127,7 @@ public class MazeSolver {
 			Location current=tycoons.next();
 			maze.set(current.getX(), current.getY(), '.');
 			if (maze.getEnd().getX()==current.getX()&& maze.getEnd().getY()==current.getY()){
-				maze.set(current.getX(),current.getY(), '.');
+				maze.set(current.getX(),current.getY(), 'E');
 				return;
 			}
 			
@@ -139,8 +139,6 @@ public class MazeSolver {
 				if (maze.get(nextX, nextY)==' '){
 					Location nextLocation=new Location(nextX,nextY,current,distanceToStart(current.getX(),current.getY(),maze.getStart().getX(),maze.getStart().getY()), distanceToGoal(current.getX(),current.getY(),maze.getEnd().getX(),maze.getEnd().getY()),true);
 					tycoons.add(nextLocation);
-					maze.set(nextX, nextY, '.');
-					tycoons.next();
 				}
 			}
 		}
@@ -156,6 +154,6 @@ public class MazeSolver {
 	
 	public static void main(String[] args){
 		MazeSolver margaret=new MazeSolver("data1.txt",true);
-		margaret.solve(2);
+		margaret.solve(3);
 	}
 }
