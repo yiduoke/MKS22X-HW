@@ -1,91 +1,119 @@
+import java.util.NoSuchElementException;
+
 public class MyDeque{
     private int start;
     private int end;
     private int size;
     private String[] deck;
     
-    public MyDeque(){deck=new String[10];}
+    public MyDeque(){
+    	deck=new String[10];
+    	}
 
-   public void addFirst(String x){
-	   if (size==0){
-		   start=0;
-		   end=0;
-		   deck[0]=x;
-		   size++;
-		   return;
-	   }
-	   if (size==deck.length){
-		   expand();
-		   start=deck.length-1;
+   public void addFirst(String x) throws NullPointerException{
+	   if (x==null){
+		   throw new NullPointerException();
 	   }
 	   else{
-		   start=Math.floorMod(start-1, deck.length);
+		   if (size==deck.length){
+			   expand();
+		   }
+		   start=floorMod(start-1,deck.length);
+		   deck[start]=x;
+		   size++;
 	   }
-	   deck[start]=x;
-	   size++;
    }
-    
-   public void addLast(String x){
-	   if (size==0){
-		   start=0;
-		   end=0;
-		   deck[0]=x;
-		   size++;
-		   return;
-	   }
-	   if (size==deck.length){
-		   expand();
-		   end=size;
+   
+   public void addLast(String x) throws NullPointerException{
+	   if (x==null){
+		   throw new NullPointerException();
 	   }
 	   else{
-		   end=Math.floorMod(end+1, deck.length);
+		   if (size==deck.length){
+			   expand();
+		   } 
+		   deck[end]=x;
+		   end=floorMod(end+1,deck.length);
+		   size++;
 	   }
-	   deck[end]=x;
-	   size++;
+   }
+   
+   public int floorMod(int x, int y){
+	   if (x>=0){
+		   return x%y;
+	   }
+	   else{
+		   return x+y;
+	   }
    }
    
    private void expand(){
 	   String[] temp=new String[deck.length*2];
-	   for (int i=0; i<size; i++){
-		  temp[i]=deck[Math.floorMod(start+i, deck.length)];
+	   for (int i=0; i<=size; i++){
+		   temp[i]=deck[start];
+		   start=floorMod(start+1,deck.length);
 	   }
+	   start=0;
+	   end=size;
 	   deck=temp;
    }
    
-   public String removeFirst(){
+   public String removeFirst() throws NoSuchElementException{
+	   if (size==0){
+		   throw new NoSuchElementException( "Empty deque! Cannot remove");
+	   }
 	   String x=deck[start];
+	   start=floorMod(start+1, deck.length);
 	   size--;
-	   start=Math.floorMod(start+1, deck.length);
 	   return x;
+
    }
    
-   public String removeLast(){
-	   String x=deck[end];
-	   size--;
-	   end=Math.floorMod(end-1, deck.length);
-	   return x;
+   public String removeLast() throws NoSuchElementException{
+	   if (size==0){
+		   throw new NoSuchElementException( "Empty deque! Cannot remove");
+	   }
+	   else{
+		   end=floorMod(end-1, deck.length);
+		   size--;
+		   String x=deck[end];
+		   return x;   
+	   }
    }
    
-   public String getFirst(){return deck[start];}
+   public String getFirst() throws NoSuchElementException{
+	   if (size==0){
+		   throw new NoSuchElementException( "Empty Deque");
+	   }
+	   else{
+		   return deck[start];
+	   }
+   }
    
-   public String getLast(){return deck[end];}
+   public String getLast() throws NoSuchElementException{
+	   if (size==0){
+		   throw new NoSuchElementException( "Empty Deque");
+	   }
+	   else{
+		   return deck[end];
+	   }
+   }
    
    public String toString(){
 	   String x="";
 	   for (int i=0; i<size; i++){
-		   x+=deck[Math.floorMod(start+i, deck.length)]+" ";
+		   x+=deck[floorMod(start+i, deck.length)]+" ";
 	   }
 	   return x;
    }
    
    public static void main(String[] args){
-	   MyDeque margaret = new MyDeque();
-	   margaret.addFirst("hola");
-	   margaret.addFirst("hi");
-	   margaret.addLast("hiii");
-	   margaret.addLast("meee");
-	   System.out.println(margaret);
+	   MyDeque Margaret=new MyDeque();
+	   System.out.println(Margaret.floorMod(-2,5));
+	   System.out.println(Margaret.floorMod(0,5));
+	   System.out.println(Margaret.floorMod(7,5));
    }
    
    
 }
+
